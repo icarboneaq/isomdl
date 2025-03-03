@@ -282,7 +282,7 @@ impl SessionManager {
         //     ));
         // }
         let items_request = ItemsRequest {
-            doc_type: "org.iso.18013.5.1.mDL".into(),
+            doc_type: "int.icao.epl.1".into(),
             namespaces,
             request_info: None,
         };
