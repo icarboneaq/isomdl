@@ -220,10 +220,10 @@ impl SessionManager {
             .context("failed to encode session transcript")?;
 
         //derive session keys
-        let sk_reader = derive_session_key(&shared_secret, &session_transcript_bytes, false)
+        let sk_reader = derive_session_key(&shared_secret, &session_transcript_bytes, true)
             .context("failed to derive reader session key")?
             .into();
-        let sk_device = derive_session_key(&shared_secret, &session_transcript_bytes, true)
+        let sk_device = derive_session_key(&shared_secret, &session_transcript_bytes, false)
             .context("failed to derive device session key")?
             .into();
 
@@ -313,10 +313,10 @@ impl SessionManager {
             None => return Err(Error::HolderError),
             Some(r) => r,
         };
-        let decrypted_response = session::decrypt_device_data(
-            &self.sk_device.into(),
+        let decrypted_response = session::decrypt_reader_data(
+            &self.sk_reader.into(),
             encrypted_response.as_ref(),
-            &mut self.device_message_counter,
+            &mut self.reader_message_counter,
         )
         .map_err(|_e| Error::DecryptionError)?;
         let device_response: DeviceResponse = cbor::from_slice(&decrypted_response)?;
