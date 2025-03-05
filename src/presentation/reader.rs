@@ -208,10 +208,7 @@ impl SessionManager {
         .context("failed to derive shared session secret")?;
         let a = shared_secret.raw_secret_bytes().as_slice();
         let mut shared_secret_hex_string = String::with_capacity(a.len() * 2);
-        for &b in a {
-            write!(&mut f, "{:02x}", b).unwrap();
-        }
-        shared_secret_hex_string
+        println!("{}", shared_secret_hex_string);
 
         let session_transcript = SessionTranscript180135(
             device_engagement_bytes,
