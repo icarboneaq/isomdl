@@ -268,7 +268,9 @@ fn decrypt(
     reader: bool,
 ) -> Result<Vec<u8>, aes_gcm::Error> {
     let initialization_vector = get_initialization_vector(message_count, reader);
+    println!(initialization_vector);
     let nonce = Nonce::from(initialization_vector);
+    println!(nonce);
     Aes256Gcm::new(session_key).decrypt(&nonce, ciphertext)
 }
 
