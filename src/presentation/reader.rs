@@ -206,7 +206,11 @@ impl SessionManager {
             &e_reader_key_private.into(),
         )
         .context("failed to derive shared session secret")?;
-        println!("{:#?}", shared_secret.to_string());
+        let a = shared_secret.as_bytes().as_slice();
+        let mut shared_secret_hex_string = String::with_capacity(a.len() * 2);
+        for &b in a {
+            write!(&mut f, "{:02x}", b).unwrap();
+        }
         let session_transcript = SessionTranscript180135(
             device_engagement_bytes,
             e_reader_key_public.clone(),
