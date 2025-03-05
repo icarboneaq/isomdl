@@ -206,7 +206,7 @@ impl SessionManager {
             &e_reader_key_private.into(),
         )
         .context("failed to derive shared session secret")?;
-        println!("{:#?}", shared_secret.to_bytes());
+        println!("{:#?}", shared_secret.to_string());
         let session_transcript = SessionTranscript180135(
             device_engagement_bytes,
             e_reader_key_public.clone(),
