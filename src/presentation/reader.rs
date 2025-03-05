@@ -220,10 +220,10 @@ impl SessionManager {
             .context("failed to encode session transcript")?;
 
         //derive session keys
-        let sk_reader = derive_session_key(&shared_secret, &session_transcript_bytes, true)
+        let sk_reader = derive_session_key(&shared_secret, &session_transcript_bytes, false)
             .context("failed to derive reader session key")?
             .into();
-        let sk_device = derive_session_key(&shared_secret, &session_transcript_bytes, false)
+        let sk_device = derive_session_key(&shared_secret, &session_transcript_bytes, true)
             .context("failed to derive device session key")?
             .into();
 
