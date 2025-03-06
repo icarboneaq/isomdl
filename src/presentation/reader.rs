@@ -341,7 +341,6 @@ impl SessionManager {
         match parse(&device_response) {
             Ok((document, x5chain, namespaces)) => {
                 self.validate_response(x5chain, document.clone(), namespaces)
-                println!("Validated Response");
             }
             Err(e) => {
                 validated_response
@@ -398,7 +397,7 @@ impl SessionManager {
                 .insert("certificate_errors".to_string(), json!(validation_errors));
             validated_response.issuer_authentication = AuthenticationStatus::Invalid
         };
-
+        println!("Validated Response");
         validated_response
     }
 }
