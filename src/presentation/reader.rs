@@ -313,10 +313,10 @@ impl SessionManager {
             None => return Err(Error::HolderError),
             Some(r) => r,
         };
-        let decrypted_response = session::decrypt_reader_data(
-            &self.sk_reader.into(),
+        let decrypted_response = session::decrypt_device_data(
+            &self.sk_device.into(),
             encrypted_response.as_ref(),
-            &mut self.reader_message_counter,
+            &mut self.device_message_counter,
         )
         .map_err(|_e| Error::DecryptionError)?;
         let device_response: DeviceResponse = cbor::from_slice(&decrypted_response)?;
