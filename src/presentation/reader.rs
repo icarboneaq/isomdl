@@ -308,18 +308,23 @@ impl SessionManager {
     }
 
     fn decrypt_response(&mut self, response: &[u8]) -> Result<DeviceResponse, Error> {
+        println!("1");
         let session_data: SessionData = cbor::from_slice(response)?;
+        println!("2");
         let encrypted_response = match session_data.data {
             None => return Err(Error::HolderError),
             Some(r) => r,
         };
+        println!("3");
         let decrypted_response = session::decrypt_device_data(
             &self.sk_device.into(),
             encrypted_response.as_ref(),
             &mut self.device_message_counter,
         )
         .map_err(|_e| Error::DecryptionError)?;
+        println!("4");
         let device_response: DeviceResponse = cbor::from_slice(&decrypted_response)?;
+        println!("5");
         Ok(device_response)
     }
 
