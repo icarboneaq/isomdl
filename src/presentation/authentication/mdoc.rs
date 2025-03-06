@@ -62,6 +62,7 @@ pub fn device_authentication(
             let device_auth: &DeviceAuth = &document.device_signed.device_auth;
 
             match device_auth {
+                println!("Namespace bytes: {:#?}", namespaces_bytes.clone());
                 DeviceAuth::DeviceSignature(device_signature) => {
                     let detached_payload = Tag24::new(DeviceAuthentication::new(
                         session_transcript,
