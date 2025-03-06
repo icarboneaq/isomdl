@@ -324,6 +324,7 @@ impl SessionManager {
     }
 
     pub fn handle_response(&mut self, response: &[u8]) -> ResponseAuthenticationOutcome {
+        println!("Print Response");
         let mut validated_response = ResponseAuthenticationOutcome::default();
 
         let device_response = match self.decrypt_response(response) {
@@ -336,10 +337,11 @@ impl SessionManager {
                 return validated_response;
             }
         };
-
+        println!("Decrypted Response");
         match parse(&device_response) {
             Ok((document, x5chain, namespaces)) => {
                 self.validate_response(x5chain, document.clone(), namespaces)
+                println!("Validated Response");
             }
             Err(e) => {
                 validated_response
