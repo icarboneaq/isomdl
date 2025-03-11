@@ -322,9 +322,9 @@ impl SessionManager {
             &mut self.device_message_counter,
         )
         .map_err(|_e| Error::DecryptionError)?;
-        println!("{:#?}", decrypted_response);
+        println!("Decrypted Response: {:#?}", decrypted_response);
         let device_response: DeviceResponse = cbor::from_slice(&decrypted_response)?;
-        println!("{:#?}", device_response);
+        println!("Device Response {:#?}", device_response);
         Ok(device_response)
     }
 
