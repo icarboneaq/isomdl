@@ -323,7 +323,7 @@ impl SessionManager {
         )
         .map_err(|_e| Error::DecryptionError)?;
         println!("Decrypted Response: {:#?}", decrypted_response);
-        let device_response = cbor::from_slice(&decrypted_response)?;
+        let device_response: DeviceResponse = cbor::from_slice(&decrypted_response)?;
         println!("Device Response: {:#?}", device_response);
         Ok(device_response)
     }
@@ -335,7 +335,6 @@ impl SessionManager {
         let device_response = match self.decrypt_response(response) {
             Ok(device_response) => device_response,
             Err(e) => {
-                println!("{:#?}", e);
                 validated_response.errors.insert(
                     "decryption_errors".to_string(),
                     json!(vec![format!("{e:?}")]),

@@ -39,6 +39,7 @@ pub struct Document {
     pub doc_type: String,
 
     /// An instance of the [IssuerSigned] struct representing the issuer-signed data.
+    #[serde(skip_serializing)]
     pub issuer_signed: IssuerSigned,
 
     /// An instance of the [DeviceSigned] struct representing the device-signed data.
