@@ -323,7 +323,7 @@ impl SessionManager {
         )
         .map_err(|_e| Error::DecryptionError)?;
         println!("Decrypted Response: {:#?}", decrypted_response);
-        let device_response: DeviceResponse = cbor::from_slice(&decrypted_response).unwrap()?;
+        let device_response = cbor::from_slice(&decrypted_response)?;
         println!("Device Response: {:#?}", device_response);
         Ok(device_response)
     }
