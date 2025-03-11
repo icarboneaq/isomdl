@@ -271,6 +271,7 @@ fn decrypt(
     let nonce = Nonce::from(initialization_vector);
     let decryptedValue = Aes256Gcm::new(session_key).decrypt(&nonce, ciphertext)
     println!("{:?}", decryptedValue);
+    return decryptedValue;
 }
 
 pub fn get_initialization_vector(message_count: &mut u32, reader: bool) -> [u8; 12] {
