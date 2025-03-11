@@ -335,6 +335,7 @@ impl SessionManager {
         let device_response = match self.decrypt_response(response) {
             Ok(device_response) => device_response,
             Err(e) => {
+                println("{:#?}", e);
                 validated_response.errors.insert(
                     "decryption_errors".to_string(),
                     json!(vec![format!("{e:?}")]),
