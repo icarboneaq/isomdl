@@ -270,7 +270,7 @@ fn decrypt(
     let initialization_vector = get_initialization_vector(message_count, reader);
     let nonce = Nonce::from(initialization_vector);
     let decryptedValue = Aes256Gcm::new(session_key).decrypt(&nonce, ciphertext);
-    println!("{:?}", decryptedValue);
+    //println!("{:?}", decryptedValue);
     decryptedValue
 }
 
